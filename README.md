@@ -157,22 +157,28 @@ Note:
 
 ## **How to Run**
 
-**Install Dependencies**
+**Recommended Python Version**
+This project was developed and tested with **Python 3.11.9**.
 
-```
+**Setup**
+```bash
+git clone https://github.com/Sabrina1911/DQN_Assignment3.git
+cd DQN_Assignment3
 pip install -r requirements.txt
+jupyter notebook
 ```
 
 **Run Notebook**
 
 - Open CSCN8020_Assignment3.ipynb
 - Run all cells sequentially
-- The notebook will:
-   * Validate the pipeline
-   * Run experiments (250, 500 episodes)
-   * Compare hyperparameters
-   * Train extended model (1000 episodes)
-   * Run final demo animation
+
+*The notebook will:*
+- Validate the pipeline
+- Run experiments (250, 500 episodes)
+- Compare hyperparameters
+- Train extended model (1000 episodes)
+- Run final demo animation
 
 ## **Reproducibility**
 
