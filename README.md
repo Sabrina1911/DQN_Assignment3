@@ -1,6 +1,6 @@
 # **CSCN8020 Assignment 3 - Deep Q-Network for Atari Pong**
 
-- **STUDENT NAME:**  SABRINA RONNIE GEORGE KARIPPATT
+- **Student Name:**  SABRINA RONNIE GEORGE KARIPPATT
 - **Student ID:**    8991911
 
 # **Overview**
