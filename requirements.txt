@@ -1,7 +1,7 @@
-numpy
-matplotlib
-torch
-gymnasium
-ale-py
-opencv-python
-jupyter
+numpy>=1.21
+matplotlib>=3.5
+torch>=1.13
+gymnasium[atari,accept-rom-license]>=0.28
+ale-py>=0.7
+opencv-python>=4.5
+jupyter>=1.0

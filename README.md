@@ -1,95 +1,202 @@
-# CSCN8020 Assignment 3 - Deep Q-Network for Atari Pong
+# **CSCN8020 Assignment 3 - Deep Q-Network for Atari Pong**
 
 **STUDENT NAME:**  SABRINA RONNIE GEORGE KARIPPATT
 **Student ID:**    8991911
 
-## Overview
+# **Overview**
 
-This project implements a **Deep Q-Network (DQN)** agent for **Atari Pong** in Python using **PyTorch** and **Gymnasium/ALE**.
+This assignment implements a Deep Q-Network (DQN) to train an agent to play Atari Pong using reinforcement learning.
 
-The notebook covers the full reinforcement learning workflow:
-- environment setup and reproducibility
-- Atari frame preprocessing
-- frame stacking
-- replay buffer implementation
-- convolutional DQN model
-- DQN agent with epsilon-greedy exploration
-- trainer class for running experiments
-- duration comparison experiments
-- batch size comparison
-- target network update frequency comparison
-- observations, limitations, and conclusion
+The project demonstrates how deep learning and reinforcement learning can be combined to solve high-dimensional control problems where the agent learns directly from raw image input.
 
-## Main File
+The work follows a structured experimental workflow:
 
-- `CSCN8020_Assignment3.ipynb` — main submission notebook
+Implementation → Validation → Experimentation → Analysis → Demo
 
-## Requirements
+## **Objectives**
 
-Install dependencies with:
+The main objectives of this assignment are:
 
-```bash
+Implement a working DQN agent using PyTorch
+Apply image preprocessing and frame stacking for Atari input
+Evaluate the impact of training duration and hyperparameters
+Analyze learning behavior using reward trends and plots
+Demonstrate the trained agent through a final gameplay simulation
+
+## **Methodology**
+
+**Environment Setup**
+
+- Environment: Atari Pong (Gymnasium)
+- Input: Raw RGB frames from the game
+- Output: Discrete action space
+
+**Preprocessing Pipeline**
+
+To make learning efficient, the following steps are applied:
+- Cropping irrelevant regions
+- Downsampling image resolution
+- Converting to grayscale
+- Normalizing pixel values to [-1, 1]
+- Frame stacking to capture motion
+
+## **DQN Architecture**
+
+The implementation includes:
+- Convolutional Neural Network (CNN) for feature extraction
+- Experience Replay Buffer for stable learning
+- Target Network to reduce instability
+- Epsilon-Greedy Policy for exploration vs exploitation
+
+Core Components:
+- DQN → Neural network model
+- DQNAgent → Handles learning and action selection
+- PongTrainer → Manages training loop and experiments
+
+## **Experiments Conducted**
+
+**Debug Run (5 Episodes)**
+
+Purpose:
+- Validate pipeline correctness
+
+**Observation:**
+- Rewards remain highly negative
+- No meaningful learning trend
+
+**Conclusion:**
+- Useful for debugging only 
+
+**Training Duration Experiment**
+
+| Episodes | Observation                          |
+|----------|--------------------------------------|
+| 250      | Early improvement, unstable          |
+| 500      | Clear upward trend and better rewards|
+
+
+Conclusion:
+- Longer training is required to observe meaningful learning
+
+**Batch Size Comparison**
+
+| Batch Size  | Observation                                    |
+|-------------|------------------------------------------------|
+| 8           | Faster short-term improvement, higher variance |
+| 16          | Slightly smoother but similar performance      |
+
+Conclusion:
+
+- Batch size has limited impact under current training scale
+
+**Target Network Update Frequency**
+
+| Update Frequency    | Observation                                             |
+|---------------------|---------------------------------------------------------|
+| Every 3 episodes    | Faster early learning but more fluctuation              |
+| Every 10 episodes   | More stable learning and competitive final performance  |
+
+## **Extended Training for Final Demo**
+
+After identifying the better configuration, an additional experiment was conducted:
+
+- 1000 episodes
+- Batch size = 8
+- Target update = every 10 episodes
+
+*Purpose:*
+
+- Improve policy quality for final demonstration
+- Validate whether longer training improves performance
+
+This extended run is not part of the main comparison, but serves as a refinement step for demonstration.
+
+## **Results and Key Insights**
+
+- Very short runs (5 episodes) are only useful for debugging
+- Learning becomes visible only after sufficient training duration
+- 500 episodes show meaningful improvement, but not full convergence
+- Target network update frequency significantly affects stability
+- Batch size has a comparatively smaller effect
+- Reinforcement learning exhibits high variance and stochastic behavior
+
+## **Final Demo**
+
+The final demo loads the trained model from the extended 1000-episode run and performs a full gameplay episode using a greedy policy.
+
+- Model file: pong_trained_model_tu10_ext1000.pth
+- Example result: reward ≈ 20–21
+
+Note:
+
+- Small variations in reward are expected due to environment stochasticity
+
+## **Limitations**
+
+- The agent does not fully converge within 1000 episodes
+- Reward variance remains high
+- Only standard DQN is implemented
+
+## **Future Improvements**
+
+- Double DQN → reduce overestimation bias
+- Dueling DQN → improve value estimation
+- Longer training (2000+ episodes)
+- Hyperparameter tuning (learning rate, epsilon decay)
+
+## **Why DQN Works for Pong**
+
+- Pong uses high-dimensional image input → CNN required  
+- Traditional Q-learning cannot scale → function approximation needed  
+- Experience replay improves sample efficiency  
+- Target network stabilizes learning
+
+## **Main File**
+
+- CSCN8020_Assignment3.ipynb — main submission notebook
+
+## **How to Run**
+
+**Install Dependencies**
+
+```
 pip install -r requirements.txt
 ```
 
-If a `requirements.txt` file is not yet present, the main packages used in this notebook are:
+**Run Notebook**
 
-- numpy
-- matplotlib
-- torch
-- gymnasium
-- ale-py
+- Open CSCN8020_Assignment3.ipynb
+- Run all cells sequentially
+- The notebook will:
+   * Validate the pipeline
+   * Run experiments (250, 500 episodes)
+   * Compare hyperparameters
+   * Train extended model (1000 episodes)
+   * Run final demo animation
 
-Depending on your local environment and helper utilities, you may also need:
-- opencv-python
-- jupyter
+## **Reproducibility**
 
-## How to Run
+- Random seeds are set where applicable
+- Results are generally reproducible, but small variations may occur due to:
+   * stochastic environment dynamics
+   * GPU/CPU differences
 
-1. Open the notebook in Jupyter Notebook or JupyterLab.
-2. Ensure the required packages are installed.
-3. Run the cells in order from top to bottom.
-4. The notebook will:
-   - validate the DQN pipeline with a short debug run
-   - run longer experiments at 250 and 500 episodes
-   - compare selected hyperparameters
-   - generate plots and summary observations
+## **Conclusion**
 
-## Experimental Structure
+This assignment successfully implements a Deep Q-Network (DQN) to solve Atari Pong.
 
-The notebook follows this progression:
+The work demonstrates that:
 
-1. **Debug validation**
-   - 5-episode run to confirm that preprocessing, replay memory, training updates, and plotting all work correctly
+- Training duration is the most critical factor in reinforcement learning
+- Controlled experimentation is necessary for meaningful comparison
+- Target network update frequency plays a key role in stability
+- Reinforcement learning requires significant training time to achieve strong performance
 
-2. **Training duration comparison**
-   - 5 episodes
-   - 250 episodes
-   - 500 episodes
+The additional 1000-episode run confirms that extended training improves policy quality, enabling a strong final gameplay demonstration.
 
-3. **Hyperparameter comparison**
-   - Batch size: 8 vs 16
-   - Target update frequency: every 3 episodes vs every 10 episodes
+## **GitHub Repository**
+https://github.com/Sabrina1911/DQN_Assignment3.git
 
-## Key Findings
+# **Final Note**
 
-- Very short runs are useful for debugging, but not for evaluating performance.
-- Longer training durations reveal clearer learning trends.
-- The 500-episode run showed the strongest evidence of learning.
-- Batch size had only a modest effect under the current training budget.
-- More frequent target network updates produced better results in this setup.
-
-## Limitations
-
-- Pong is a difficult Atari environment, and 250-500 episodes are still limited for full DQN convergence.
-- Results are based on single runs and may vary because reinforcement learning is stochastic.
-- Only a small subset of hyperparameters was explored.
-
-## Notes
-
-- Rewards in Atari Pong typically range from **-21 to +21**, where higher values indicate better performance.
-- The notebook is designed to emphasize **structured experimentation** as well as implementation correctness.
-
-## Author
-
-Prepared for **CSCN8020 - Reinforcement Learning Programming**
+This notebook emphasizes not only implementation correctness, but also structured experimentation, analysis, and interpretation, which are essential for real-world reinforcement learning workflows.
