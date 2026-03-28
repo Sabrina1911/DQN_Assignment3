@@ -1,7 +1,7 @@
 # **CSCN8020 Assignment 3 - Deep Q-Network for Atari Pong**
 
-**STUDENT NAME:**  SABRINA RONNIE GEORGE KARIPPATT
-**Student ID:**    8991911
+- **STUDENT NAME:**  SABRINA RONNIE GEORGE KARIPPATT
+- **Student ID:**    8991911
 
 # **Overview**
 
@@ -17,11 +17,11 @@ Implementation → Validation → Experimentation → Analysis → Demo
 
 The main objectives of this assignment are:
 
-Implement a working DQN agent using PyTorch
-Apply image preprocessing and frame stacking for Atari input
-Evaluate the impact of training duration and hyperparameters
-Analyze learning behavior using reward trends and plots
-Demonstrate the trained agent through a final gameplay simulation
+- Implement a working DQN agent using PyTorch
+- Apply image preprocessing and frame stacking for Atari input
+- Evaluate the impact of training duration and hyperparameters
+- Analyze learning behavior using reward trends and plots
+- Demonstrate the trained agent through a final gameplay simulation
 
 ## **Methodology**
 
